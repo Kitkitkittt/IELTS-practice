@@ -21,7 +21,7 @@ If a `swarm-ready` skill is installed, load it. Otherwise execute the documented
 
 ## Repository starting point
 
-Read: [README.md](README.md), [scripts](scripts), [.github](.github).
+Read the [README testing policy](README.md#测试要求) and [contribution policy](CONTRIBUTING.md). This handoff concerns the maintainer's fork; external contributions to the upstream repository still target its `opensource` branch.
 
 Continue an existing approved issue or a clearly scoped user objective after inspecting the source map below. If none is selected, return the smallest useful improvement and its verifier as the handoff; do not begin a portfolio-wide rewrite.
 
@@ -41,7 +41,15 @@ The base above is an inspection snapshot, not a permanent working branch. Refres
 
 ## Verification starting point
 
-No executable acceptance command was established by this bounded source inspection. Read `README.md`, `scripts`, `.github` and record the narrowest existing check before implementation. Do not invent a `test` command or infer that the repository has no tests from this gap. For a documentation-only task, check links, factual source anchors and whitespace; do not build unrelated application code.
+**Documentation only:** inspect the changed links and wording, then check tracked paths and changed-line whitespace for a local, uncommitted patch from the repository root:
+
+```sh
+git ls-files --error-unmatch -- README.md SWARM_READY.md CONTRIBUTING.md developer/package.json .github/workflows/ci.yml && git diff --check HEAD -- README.md SWARM_READY.md
+```
+
+For a committed candidate, compare the recorded review base and candidate SHA with `git diff --check` instead of comparing the working tree with `HEAD`. These are local Git checks. They do not open the app, run Playwright, regenerate bundles, or package any third-party materials. Optional local listening assets are not a prerequisite.
+
+**Application changes:** follow the README testing policy. The [CI workflow](.github/workflows/ci.yml) includes `npm test --prefix developer` ([manifest](developer/package.json)), bundle-drift, Python, and browser checks; its filters are pushes to and PRs targeting `opensource`, not the fork's `main`. These commands are source references, not evidence that checks have run on this branch.
 
 ## Required handoff result
 
