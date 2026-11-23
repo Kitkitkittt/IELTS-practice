@@ -360,6 +360,8 @@ assets/generated/listening-exams/listening-index.compat.js
 
 ## 测试要求
 
+维护与交接：仅修改文档时，先阅读 [SWARM_READY.md](SWARM_READY.md) 中的路径与验证说明，无需启动浏览器或打包。
+
 功能或优化改动后，按顺序运行：
 
 ```bash
